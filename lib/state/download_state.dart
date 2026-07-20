@@ -42,10 +42,11 @@ class DownloadProgress {
       );
 }
 
-class DownloadNotifier extends StateNotifier<DownloadProgress> {
-  final Ref _ref;
-
-  DownloadNotifier(this._ref) : super(DownloadProgress.initial());
+class DownloadNotifier extends Notifier<DownloadProgress> {
+  @override
+  DownloadProgress build() {
+    return DownloadProgress.initial();
+  }
 
   Future<void> startAudioConversionAndDownload({
     required YoutubeVideoMetadata metadata,
@@ -53,7 +54,7 @@ class DownloadNotifier extends StateNotifier<DownloadProgress> {
   }) async {
     state = DownloadProgress.downloading(0.05, "Initializing audio extraction...");
 
-    final ffmpegService = _ref.read(ffmpegServiceProvider);
+    final ffmpegService = ref.read(ffmpegServiceProvider);
 
     // Wire progress updates to our state
     final subscription = ffmpegService.progressStream.listen((progress) {
@@ -74,7 +75,7 @@ class DownloadNotifier extends StateNotifier<DownloadProgress> {
       );
 
       // Add downloaded item to global library state
-      await _ref.read(libraryStateProvider.notifier).addDownloadedItem(downloadedItem);
+      await ref.read(libraryStateProvider.notifier).addDownloadedItem(downloadedItem);
       state = DownloadProgress.success();
     } catch (e) {
       state = DownloadProgress.failed(e.toString().replaceAll("Exception: ", ""));
@@ -88,7 +89,7 @@ class DownloadNotifier extends StateNotifier<DownloadProgress> {
   }) async {
     state = DownloadProgress.downloading(0.05, "Initializing video download...");
 
-    final ffmpegService = _ref.read(ffmpegServiceProvider);
+    final ffmpegService = ref.read(ffmpegServiceProvider);
     final subscription = ffmpegService.progressStream.listen((progress) {
       state = DownloadProgress.downloading(progress, "Downloading high quality muxed MP4...");
     });
@@ -97,7 +98,7 @@ class DownloadNotifier extends StateNotifier<DownloadProgress> {
       final downloadedItem = await ffmpegService.downloadVideoMp4(metadata: metadata);
 
       // Add downloaded item to global library state
-      await _ref.read(libraryStateProvider.notifier).addDownloadedItem(downloadedItem);
+      await ref.read(libraryStateProvider.notifier).addDownloadedItem(downloadedItem);
       state = DownloadProgress.success();
     } catch (e) {
       state = DownloadProgress.failed(e.toString().replaceAll("Exception: ", ""));
@@ -111,6 +112,4 @@ class DownloadNotifier extends StateNotifier<DownloadProgress> {
   }
 }
 
-final downloadStateProvider = StateNotifierProvider<DownloadNotifier, DownloadProgress>((ref) {
-  return DownloadNotifier(ref);
-});
+final downloadStateProvider = NotifierProvider<DownloadNotifier, DownloadProgress>(DownloadNotifier.new);

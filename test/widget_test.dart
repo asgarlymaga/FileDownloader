@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_soloud/flutter_soloud.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pitch_shifter_432hz/main.dart';
 

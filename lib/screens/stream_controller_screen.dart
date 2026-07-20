@@ -252,7 +252,7 @@ class _StreamControllerScreenState extends ConsumerState<StreamControllerScreen>
                             height: 180,
                             width: double.infinity,
                             fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) => Container(
+                            errorBuilder: (context, error, stackTrace) => Container(
                               height: 180,
                               color: Colors.grey.shade300,
                               child: const Icon(Icons.image, size: 48),

@@ -101,7 +101,7 @@ class AudioService {
         throw Exception("Could not load audio source: $filePathToLoad");
       }
 
-      _activeHandle = await SoLoud.instance.play(_activeSource!);
+      _activeHandle = SoLoud.instance.play(_activeSource!);
 
       // Apply the pitch scale factors immediately
       SoLoud.instance.setRelativePlaySpeed(_activeHandle!, pitchMultiplier);
@@ -121,7 +121,7 @@ class AudioService {
   Future<void> pause() async {
     if (!_initialized || _activeHandle == null) return;
     try {
-      SoLoud.instance.pause(_activeHandle!);
+      SoLoud.instance.setPause(_activeHandle!, true);
       _isPlaying = false;
       _isPlayingController.add(false);
       _positionTimer?.cancel();
@@ -251,7 +251,7 @@ class AudioService {
     await _isPlayingController.close();
     await _visualizerController.close();
     if (_initialized) {
-      await SoLoud.instance.deinit();
+      SoLoud.instance.deinit();
     }
   }
 }

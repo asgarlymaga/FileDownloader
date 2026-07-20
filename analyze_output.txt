@@ -1,0 +1,40 @@
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 93.0.0 (105.0.0 available)
+  analyzer 10.0.1 (14.1.0 available)
+  ffmpeg_kit_flutter 6.0.3 (discontinued)
+  hooks 2.0.2 (2.1.0 available)
+  matcher 0.12.18 (0.12.20 available)
+  meta 1.17.0 (1.19.0 available)
+  package_config 2.2.0 (3.0.0 available)
+  record_use 0.6.0 (1.0.0 available)
+  test 1.29.0 (1.31.2 available)
+  test_api 0.7.9 (0.7.13 available)
+  test_core 0.6.15 (0.6.19 available)
+  vector_math 2.2.0 (2.4.0 available)
+  video_player 2.11.1 (2.13.0 available)
+  video_player_android 2.9.5 (2.11.0 available)
+  xml 6.6.1 (7.0.1 available)
+Got dependencies!
+1 package is discontinued.
+14 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Analyzing app...
+
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/screens/library_screen.dart:293:62 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/screens/library_screen.dart:293:94 • deprecated_member_use
+   info • Unnecessary use of multiple underscores • lib/screens/stream_controller_screen.dart:255:47 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/screens/stream_controller_screen.dart:255:51 • unnecessary_underscores
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/screens/stream_controller_screen.dart:262:49 • deprecated_member_use
+warning • The operand can't be 'null', so the condition is always 'false' • lib/services/ffmpeg_service.dart:28:27 • unnecessary_null_comparison
+warning • Dead code • lib/services/ffmpeg_service.dart:28:36 • dead_code
+warning • The operand can't be 'null', so the condition is always 'false' • lib/services/ffmpeg_service.dart:124:27 • unnecessary_null_comparison
+warning • Dead code • lib/services/ffmpeg_service.dart:124:36 • dead_code
+   info • Unnecessary braces in a string interpolation • lib/services/ffmpeg_service.dart:130:50 • unnecessary_brace_in_string_interps
+warning • The operand can't be 'null', so the condition is always 'false' • lib/services/youtube_service.dart:34:27 • unnecessary_null_comparison
+warning • Dead code • lib/services/youtube_service.dart:34:36 • dead_code
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/widgets/visualizer_widget.dart:19:29 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/widgets/visualizer_widget.dart:22:49 • deprecated_member_use
+warning • Unused import: 'package:flutter_soloud/flutter_soloud.dart' • test/widget_test.dart:3:8 • unused_import
+
+15 issues found. (ran in 2.2s)

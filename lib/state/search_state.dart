@@ -19,16 +19,17 @@ class SearchState {
   factory SearchState.error(String message) => SearchState(isLoading: false, errorMessage: message);
 }
 
-class SearchNotifier extends StateNotifier<SearchState> {
-  final Ref _ref;
-
-  SearchNotifier(this._ref) : super(SearchState.initial());
+class SearchNotifier extends Notifier<SearchState> {
+  @override
+  SearchState build() {
+    return SearchState.initial();
+  }
 
   Future<void> searchVideo(String urlOrId) async {
     if (urlOrId.trim().isEmpty) return;
     state = SearchState.loading();
     try {
-      final service = _ref.read(youtubeServiceProvider);
+      final service = ref.read(youtubeServiceProvider);
       final metadata = await service.getVideoMetadata(urlOrId);
       state = SearchState.success(metadata);
     } catch (e) {
@@ -41,6 +42,4 @@ class SearchNotifier extends StateNotifier<SearchState> {
   }
 }
 
-final searchStateProvider = StateNotifierProvider<SearchNotifier, SearchState>((ref) {
-  return SearchNotifier(ref);
-});
+final searchStateProvider = NotifierProvider<SearchNotifier, SearchState>(SearchNotifier.new);
